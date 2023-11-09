@@ -9,7 +9,7 @@
     "author": "Proyecta, Primate",
     "website": "https://primate.uy",
     "license": "AGPL-3",
-    "depends": ["account", "partner_statement"],
+    "depends": ["account"],
     "data": [
         'data/ir_cron_data.xml',
         'data/mail_template.xml',
