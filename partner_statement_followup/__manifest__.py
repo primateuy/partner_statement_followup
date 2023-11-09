@@ -4,7 +4,7 @@
     "version": "13.0.1.3.0.06.11.2023.23.00",
     "price": 28.00,
     "currency": "USD"
-    "category": "Accounting & Finance",
+    "category": "Accounting",
     "summary": "Extension module for Partner Statement",
     "author": "Proyecta, Primate",
     "website": "https://primate.uy",
