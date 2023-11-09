@@ -3,7 +3,7 @@
     "name": "Partner Statement Followup",
     "version": "13.0.1.3.0.06.11.2023.23.00",
     "price": 28.00,
-    "currency": "USD"
+    "currency": "USD",
     "category": "Accounting",
     "summary": "Extension module for Partner Statement",
     "author": "Proyecta, Primate",
