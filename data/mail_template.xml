@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <!--    <data noupdate="1">-->
+
+        <record id="mail_template_followup" model="mail.template">
+            <field name="name">Follow-up: Send by email</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="subject">Account statement of ${object.name or 'n/a' }</field>
+            <field name="partner_to">${object.id}</field>
+            <field name="email_cc">${object.get_email_cc()}</field>
+            <field name="email_from">${ctx['email_from']}</field>
+            <field name="body_html" type="xml">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear ${object.name}<br/><br/>
+                        Please find enclosed your statement of account with the outstanding amounts. We remind you of the importance of
+                        regularize your debt as soon as possible.
+                        If you have already paid, please ignore this message.
+                        If not, please contact us to discuss possible solutions.
+                        <br /><br />
+                        Thank you for your prompt attention to this matter.
+                        <br/><br/>
+                        Sincerely,<br/>
+                        % if user and user.signature:
+                        ${user.signature | safe}
+                        % endif
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="user_signature" eval="False"/>
+        </record>
+
+
+    </data>
+</odoo>
