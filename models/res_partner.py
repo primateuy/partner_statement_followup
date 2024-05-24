@@ -54,7 +54,7 @@ class Partner(models.Model):
         if not self.followup_report:
             return
         activity_wizard_obj = self.env[self.followup_report]
-        activity_wizard = activity_wizard_obj.with_context(active_ids=self.ids).create({})
+        activity_wizard = activity_wizard_obj.with_context(active_ids=self.ids, lang=self.lang).create({})
         res = activity_wizard.button_export_pdf()
         report_name = res['report_name']
         report = self.env['ir.actions.report']._get_report_from_name(report_name)
@@ -69,13 +69,12 @@ class Partner(models.Model):
             'store_fname': attachment_name,
             'res_model': self._name,
             'res_id': self.id,
-            'mimetype': 'application/x-pdf'
+            'mimetype': 'application/pdf'
         })
         template = self.env.ref('partner_statement_followup.mail_template_followup').get_email_template(self.id)
         template_ctx = template._context.copy()
         template_ctx['email_from'] = self.env.company.email
-        body_html = self.env['mail.template'].with_context(template_ctx)._render_template(template.body_html,
-                                                                                          self._name, self.id)
+        body_html = self.env['mail.template'].with_context(template_ctx)._render_template(template.body_html, self._name, self.id)
         mail_id = template.send_mail(self.id)
         mail = self.env['mail.mail'].browse(mail_id)
         mail.attachment_ids += attachment
