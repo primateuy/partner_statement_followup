@@ -74,16 +74,16 @@ class Partner(models.Model):
         template = self.env.ref('partner_statement_followup.mail_template_followup').get_email_template(self.id)
         template_ctx = template._context.copy()
         template_ctx['email_from'] = self.env.company.email
-        body_html = self.env['mail.template'].with_context(template_ctx)._render_template(template.body_html, self._name, self.id)
+        # body_html = self.env['mail.template'].with_context(template_ctx)._render_template(template.body_html, self._name, self.id)
         mail_id = template.send_mail(self.id)
         mail = self.env['mail.mail'].browse(mail_id)
         mail.attachment_ids += attachment
-        self.message_notify(
-            body=body_html,
-            partner_ids=[self.id],
-            subtype='mail.mt_comment',
-            email_layout_xmlid='mail.mail_notification_light',
-        )
+        # self.message_notify(
+        #     body=body_html,
+        #     partner_ids=[self.id],
+        #     subtype='mail.mt_comment',
+        #     email_layout_xmlid='mail.mail_notification_light',
+        # )
 
         mail.send()
         if ctx.get('manually_ran', False):
